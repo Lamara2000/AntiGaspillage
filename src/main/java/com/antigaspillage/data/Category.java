@@ -1,4 +1,4 @@
-package com.example.demo.data;
+package com.antigaspillage.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +17,10 @@ public class Category {
 	
 	public Category(String name) {
 		this.name = name;
+	}
+
+	public Category() {
+
 	}
 
 	public long getId() {

@@ -1,4 +1,4 @@
-package com.example.demo.data;
+package com.antigaspillage.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
