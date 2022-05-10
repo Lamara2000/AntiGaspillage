@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Trader {
@@ -17,6 +18,17 @@ public class Trader {
 	@Column(nullable = false)
 	private String companyName;
 	
+	@ManyToOne
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Column(nullable = false)
 	private String location;
 	
@@ -24,7 +36,7 @@ public class Trader {
 	
 	private String description;
 	
-	public Trader(String companyName, String location, String description) {
+	public Trader(User user, String companyName, String location, String description) {
 		super();
 		this.companyName = companyName;
 		this.location = location;
