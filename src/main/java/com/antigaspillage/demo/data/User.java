@@ -1,15 +1,13 @@
-package com.antigaspillage.data;
+package com.antigaspillage.demo.data;
+
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@EnableJpaRepositories
 public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,18 +32,19 @@ public class User {
 	
 	@ManyToOne
 	private Role role;
+
 	
-	public User() {
-		
+	public User(){
 	}
 
-	public User(String firstName, String lastName, String address, String email, String password, Role role) {
-		super();
+	public User(long id, String firstName, String lastName, String address, String email, String password, Timestamp addDate, Role role) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.email = email;
 		this.password = password;
+		this.addDate = addDate;
 		this.role = role;
 	}
 
@@ -112,7 +111,18 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", address='" + address + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", addDate=" + addDate +
+				", role=" + role +
+				'}';
+	}
 }

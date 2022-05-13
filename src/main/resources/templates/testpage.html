@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Text Page</h1>
+    <form th:action="@{/test}" th:object="${appUserForm}" method="post">
+        Username/ Email : <input type="text" th:field="*{email}">  <input value="velider" type="submit">
+    </form>
+</body>
+</html>

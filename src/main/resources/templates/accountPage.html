@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Account Page</h1>
+    <h1 th:inline="text">Hello <div th:text="${username}" /></h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Déconnecté"/>
+    </form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.antigaspillage.data;
+package com.antigaspillage.demo.data;
 
 import java.sql.Timestamp;
 
