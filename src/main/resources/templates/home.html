@@ -8,64 +8,120 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
     <title>Home</title>
     <style>
-        .menu-right{
-            float: right;
+        .menu{
+            background-color: #927a06;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-        .menu-left{
-            float: left;
+        ul > li {
+            display: inline-block;
+            color: aliceblue;
+            margin: 1em;
         }
-        .menu-item{
-            margin: 25%;
-        }
+
     </style>
 </head>
 <body>
 <div class="contenair">
     <div class="menu">
-        <table class="menu-left">
-            <tr>
-                <td>
-                    <a class="menu-item">Acceuil</a>
-                </td>
-                <td>
-                    <a class="menu-item">Paniers</a>
-                </td>
-                <td>
-                    <a class="menu-item">Commercant</a>
-                </td>
-            </tr>
-        </table>
-        <table class="menu-right">
-            <div class="" th:if="${#authentication.isAuthenticated()==false}">
+        <ul style="float: left">
+            <li><a>Acceuil</a></li>
+            <li><a>Paniers</a></li>
+            <li><a>Commercant</a></li>
+        </ul>
+        <div class="menu-right" style="float: right">
+            <table>
                 <tr>
-                    <td style="padding: 1%">
-                        <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
-                           href="/register">Register</a>
-                    </td>
-                    <td style="padding: 1%">
-                        <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
-                           href="/login">Login</a>
-                    </td>
+                    <div class="" th:if="${#authentication.isAuthenticated()==false}">
+                        <td>
+                            <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                               href="/register">Register</a>
+                        </td>
+                        <td style="padding: 1%">
+                            <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                               href="/login">Login</a>
+                        </td>
+                    </div>
+                    <div class="" th:if="${#authentication.isAuthenticated()==true}">
+                        <td>
+                            <a  class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                                href="/account">Compte</a>
+                        </td>
+                        <td style="padding: 1%">
+                            <a class="bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
+                                   href="/logout">Déconnection</a>
+                        </td>
+                    </div>
                 </tr>
-            </div>
-            <div class="" th:if="${#authentication.isAuthenticated()==true}">
-                <tr>
-                    <td style="padding: 1%">
-                        <a  class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
-                        href="/account">Compte</a>
-                    </td>
-                    <td style="padding: 1%">
-                        <a class="bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
-                         href="/logout">Déconnection</a>
-                    </td>
-                </tr>
-            </div>
-
-        </table>
+            </table>
+        </div>
     </div>
+    <h1 style="text-align: center; font-size: 2em;"> Bienvenue </h1>
+    <p style="margin: 2em">
+        Proinde die funestis interrogationibus praestituto imaginarius iudex equitum resedit magister adhibitis aliis iam quae essent agenda praedoctis,
+        et adsistebant hinc inde notarii, quid quaesitum esset, quidve responsum, cursim ad Caesarem perferentes, cuius imperio truci, stimulis reginae exsertantis
+        aurem subinde per aulaeum, nec diluere obiecta permissi nec defensi periere conplures.
+
+        Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris
+        peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat
+        futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.
+
+        Abusus enim multitudine hominum, quam tranquillis in rebus diutius rexit, ex agrestibus habitaculis urbes construxit multis opibus firmas et viribus, quarum
+        ad praesens pleraeque licet Graecis nominibus appellentur, quae isdem ad arbitrium inposita sunt conditoris, primigenia tamen nomina non amittunt, quae eis
+        Assyria lingua institutores veteres indiderunt.
+
+        Nemo quaeso miretur, si post exsudatos labores itinerum longos congestosque adfatim commeatus fiducia vestri ductante barbaricos pagos adventans velut
+        mutato repente consilio ad placidiora deverti.
+
+    </p><br><br>
+    <p style="margin: 2em">
+        Sed (saepe enim redeo ad Scipionem, cuius omnis sermo erat de amicitia) querebatur, quod omnibus in rebus homines diligentiores essent; capras et oves quot
+        quisque haberet, dicere posse, amicos quot haberet, non posse dicere et in illis quidem parandis adhibere curam, in amicis eligendis neglegentis esse nec habere
+        quasi signa quaedam et notas, quibus eos qui ad amicitias essent idonei, iudicarent. Sunt igitur firmi et stabiles et constantes eligendi; cuius generis est magna
+        penuria. Et iudicare difficile est sane nisi expertum; experiendum autem est in ipsa amicitia. Ita praecurrit amicitia iudicium tollitque experiendi potestatem.
+
+        Hanc regionem praestitutis celebritati diebus invadere parans dux ante edictus per solitudines Aboraeque amnis herbidas ripas, suorum indicio proditus, qui admissi
+        flagitii metu exagitati ad praesidia descivere Romana. absque ullo egressus effectu deinde tabescebat immobilis.
+
+        Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum
+        liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata
+        quidem cum choris totidemque remanerent magistris.
+
+        Et quoniam inedia gravi adflictabantur, locum petivere Paleas nomine, vergentem in mare, valido muro firmatum, ubi conduntur nunc usque commeatus distribui militibus omne
+        latus Isauriae defendentibus adsueti. circumstetere igitur hoc munimentum per triduum et trinoctium et cum neque adclivitas ipsa sine discrimine adiri letali, nec cuniculis
+        quicquam geri posset, nec procederet ullum obsidionale commentum, maesti excedunt postrema vi subigente maiora viribus adgressuri.
+
+        Hae duae provinciae bello quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub iugum factae sunt vectigales. et hae quidem regiones velut in
+        prominenti terrarum lingua positae ob orbe eoo monte Amano disparantur.
+
+    </p><br><br>
+    <p style="margin: 2em">
+        Alii summum decus in carruchis solito altioribus et ambitioso vestium cultu ponentes sudant sub ponderibus lacernarum, quas in collis insertas cingulis ipsis adnectunt
+        nimia subtegminum tenuitate perflabiles, expandentes eas crebris agitationibus maximeque sinistra, ut longiores fimbriae tunicaeque perspicue luceant varietate liciorum
+        effigiatae in species animalium multiformes.
+
+        Primi igitur omnium statuuntur Epigonus et Eusebius ob nominum gentilitatem oppressi. praediximus enim Montium sub ipso vivendi termino his vocabulis appellatos fabricarum
+        culpasse tribunos ut adminicula futurae molitioni pollicitos.
+
+        Excogitatum est super his, ut homines quidam ignoti, vilitate ipsa parum cavendi ad colligendos rumores per Antiochiae latera cuncta destinarentur relaturi quae audirent.
+        hi peragranter et dissimulanter honoratorum circulis adsistendo pervadendoque divites domus egentium habitu quicquid noscere poterant vel audire latenter intromissi per
+        posticas in regiam nuntiabant, id observantes conspiratione concordi, ut fingerent quaedam et cognita duplicarent in peius, laudes vero supprimerent Caesaris, quas invitis
+        conpluribus formido malorum inpendentium exprimebat.
+
+        Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret? cum
+        praesertim illa perdiscere ludus esset. Quam ob rem dissentientium inter se reprehensiones non sunt vituperandae, maledicta, contumeliae, tum iracundiae, contentiones concertationesque
+        in disputando pertinaces indignae philosophia mihi videri solent.
+
+        Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis
+        cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus
+        ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.
+
+        Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum!
+        qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum,
+        in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+    </p>
 </div>
-
-
-
 </body>
 </html>
