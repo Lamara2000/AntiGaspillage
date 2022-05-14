@@ -68,7 +68,7 @@ public class RegisterController {
             List<Role> roles = roleDAO.findAll();
             model.addAttribute("countries", roles);
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            return new ModelAndView("registerPage");
+            return new ModelAndView("register");
         }
         return new ModelAndView("redirect:/registerSuccessful");
     }
