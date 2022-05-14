@@ -10,9 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     @GetMapping("/login")
-    public ModelAndView loginPage(Model model) {
-        return new ModelAndView("login");
-    }
+    public ModelAndView loginPage(Model model) {return new ModelAndView("login");}
 
     @PostMapping("/account")
     public ModelAndView accountRedirection(Model model){

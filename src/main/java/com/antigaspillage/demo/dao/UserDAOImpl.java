@@ -3,6 +3,7 @@ package com.antigaspillage.demo.dao;
 import com.antigaspillage.demo.data.Role;
 import com.antigaspillage.demo.data.User;
 import com.antigaspillage.demo.form.AppUserForm;
+import com.antigaspillage.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -24,27 +25,36 @@ public class UserDAOImpl implements IUserDAO {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     public User createAppUser(AppUserForm form) {
 
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         List<Role> listRole =  entityManager.createQuery("select r from Role r where r.name = 'USER_CLIENT'").getResultList();
-
+        List<User> userList = userRepository.findAll();
+        User user = new User();
 
         String firstname = form.getFirstname();
         String lastname = form.getLastname();
         String email = form.getEmail();
+        String phoneNumber = form.getPhoneNumber();
         String adresse = form.getAdresse();
         String encrytedPassword = this.passwordEncoder.encode(form.getPassword());
 
         List<Role> roleList = entityManager.createQuery("select r from Role r where r.name='USER_CLIENT'").getResultList();
         Role role = roleList.get(0);
 
-        System.out.println(role.getId());
-        Long lastId = nextUserId();
 
-        User user = new User(lastId, form.getFirstname(), form.getLastname(), form.getAdresse(), form.getEmail(), encrytedPassword, timestamp, role);
+
+        Long lastId = nextUserId();
+        if (form.getPassword()== form.confirmPassword && form.getPassword().length()>8)
+            user = new User(lastId, firstname, lastname, adresse, email, phoneNumber, encrytedPassword, timestamp, role);
+        else
+            user = null;
+
         return user;
     }
 

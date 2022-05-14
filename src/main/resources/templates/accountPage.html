@@ -2,13 +2,126 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <title>Account</title>
+
 </head>
 <body>
-    <h1>Account Page</h1>
-    <h1 th:inline="text">Hello <div th:text="${username}" /></h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Déconnecté"/>
-    </form>
+<div>
+    <a class="md:w-1/6 shadow-xl rounded-2xl border bg-green-100 w-full text-center bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+       th:href="@{/home}" >Retour Page d'acceuil</a>
+</div>
+<div style="margin-top: 2%" class="container mx-auto h-full flex justify-center items-center text-green-700 px-4 ">
+    <div class="md:w-2/3 shadow-xl rounded-2xl border bg-green-100 w-full">
+        <h1 class="text-center font-medium text-2xl text-white rounded-t-2xl bg-green-500 py-4" th:inline="text">Votre Compte :</h1><br>
+        <h2 class="text-center font-medium font-bold text-lg block mb-2" th:inline="text"> Information compte :</h2><br>
+        <ul class="border-teal p-4 border-t-12 bg-white mb-8">
+            <li class="block-list">
+                <div class="mb-6">
+                    <label class="font-bold text-lg block mb-2">Nom : </label>
+                    <div th:text="${user.firstName}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <div class="mb-6">
+                    <label class="font-bold text-lg block mb-2">Prénom : </label>
+                    <div th:text="${user.lastName}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <div class="mb-6">
+                    <label class="font-bold text-lg block mb-2">Email : </label>
+                    <div th:text="${user.email}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <div class="mb-6">
+                    <label class="font-bold text-lg block mb-2">Adresse : </label>
+                    <div th:text="${user.address}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <div class="mb-6">
+                    <label class="font-bold text-lg block mb-2">Date d'adession : </label>
+                    <div th:text="${user.addDate.toString()}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <div class="mb-6">
+                        <label class="font-bold text-lg block mb-2">Statut :</label>
+                    <div th:text="${role.name}"/>
+                </div>
+            </li>
+            <li class="block-list">
+                <form th:action="@{/logout}" method="post">
+                    <div class="flex items-center justify-between">
+                        <input class="bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
+                               type="submit" value="Se Déconnecter">
+                    </div>
+                </form>
+            </li>
+        </ul><br>
+        <div th:if="statut">
+            <h3 class="text-center font-medium font-bold text-lg block mb-2" th:inline="text"> Pannier mis en vente :</h3><br>
+            <a class="text-center bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+               th:href="@{/becomeTrader(curUser=${user.id})}" >Ajouter un Panier</a><br>
+            <ul class="border-teal p-4 border-t-12 bg-white mb-8">
+                <div th:if="carts">
+                    <li class="block-list" th:each="value:${carts}">
+                        <div class="mb-6">
+                            <label class="font-bold text-lg block mb-2">N° de Vente <th:block th:text="${value.id}"/> </label>
+                            <label class="font-bold text-lg block mb-2">Desription pannier : </label><div th:text="${value.description}"/>
+                            <label class="font-bold text-lg block mb-2">N° d'article : </label><div th:text="${value.nbCart}"/>
+                            <label class="font-bold text-lg block mb-2">Date du panier : </label><div th:text="${value.date.toString()}"/>
+                            <label class="font-bold text-lg block mb-2">Catégorie de la commande : </label><div th:text="${value.category.name}"/>
+                        </div>
+                        <div class="flex items-center justify-between  ">
+                            <a class="text-center bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
+                               th:href="@{/dellReserv(cart=${value.id})}" >Supprimer le panier</a>
+                        </div>
+                        <label class="font-bold text-lg block ">------------------------------------------------------------------------------------------------------------------------------</label>
+                    </li>
+                </div>
+                <di th:unless="carts==null">
+                    <label class="text-center font-bold text-lg block mb-2">Aucun panier résèrvé  </label>
+                </di>
+            </ul>
+        </div><br>
+        <h3 class="text-center font-medium font-bold text-lg block mb-2" th:inline="text"> Réservation en cour(s) :</h3>
+        <ul class="border-teal p-4 border-t-12 bg-white mb-8">
+            <div th:if="reservations">
+                <li class="block-list" th:each="value:${reservations}">
+                        <div class="mb-6">
+                            <label class="font-bold text-lg block mb-2">Panier n° <th:block th:text="${value.cart.id}"/> </label>
+                            <label class="font-bold text-lg block mb-2">Vendeur : </label><div th:text="${value.cart.trader.companyName}"/>
+                            <label class="font-bold text-lg block mb-2">N° de commande : </label><div th:text="${value.cart.id}"/>
+                            <label class="font-bold text-lg block mb-2">Date de reservation : </label><div th:text="${value.cart.date.toString()}"/>
+                            <label class="font-bold text-lg block mb-2">Nombre d'article : </label><div th:text="${value.cart.nbCart}"/>
+                            <label class="font-bold text-lg block mb-2">Catégorie de la commande : </label><div th:text="${value.cart.category.name}"/>
+                        </div>
+                        <div class="flex items-center justify-between  ">
+                            <a class="text-center bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
+                               th:href="@{/dellReserv(reservation=${value.id})}" >Ne plus reservé</a>
+                        </div>
+                    <label class="font-bold text-lg block ">------------------------------------------------------------------------------------------------------------------------------</label>
+                </li>
+            </div>
+            <di th:unless="reservations==null">
+                <label class="text-center font-bold text-lg block mb-2">Aucun panier résèrvé  </label>
+            </di>
+        </ul><br>
+        <div class="mb-6" th:if="statut=='USER_CLIENT'">
+            <h3 class="text-center font-medium font-bold text-lg block mb-2" th:inline="text"> Devenir vendeur</h3>
+            <div class="mb-6">
+                <a class="text-center bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                   th:href="@{/becomeTrader(curUser=${user.id})}" >Devenir Vendeur</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

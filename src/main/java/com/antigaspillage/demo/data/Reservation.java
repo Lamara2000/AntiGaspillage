@@ -1,5 +1,7 @@
 package com.antigaspillage.demo.data;
 
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
+@EnableJpaRepositories
 public class Reservation {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +20,9 @@ public class Reservation {
 	
 	@ManyToOne
 	private User user;
+
+	@ManyToOne
+	private Trader trader;
 	
 	@ManyToOne
 	private Cart cart;
@@ -31,9 +37,10 @@ public class Reservation {
 		
 	}
 
-	public Reservation(User user, Cart cart, Timestamp reservationDate, int quantity) {
+	public Reservation(User user, Trader trader, Cart cart, Timestamp reservationDate, int quantity) {
 		super();
 		this.user = user;
+		this.trader=trader;
 		this.cart = cart;
 		this.reservationDate = reservationDate;
 		this.quantity = quantity;
@@ -53,6 +60,14 @@ public class Reservation {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Trader getTrader() {
+		return trader;
+	}
+
+	public void setTrader(Trader trader) {
+		this.trader = trader;
 	}
 
 	public Cart getCart() {
@@ -78,5 +93,16 @@ public class Reservation {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Reservation{" +
+				"id=" + id +
+				", user=" + user +
+				", trader=" + trader +
+				", cart=" + cart +
+				", reservationDate=" + reservationDate +
+				", quantity=" + quantity +
+				'}';
+	}
 }

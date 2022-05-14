@@ -4,18 +4,21 @@ import com.antigaspillage.demo.data.Role;
 
 public class AppUserForm {
     private Long id;
-    private String firstname,  lastname,  email, adresse,  password,  confirmPassword;
+    public String firstname,  lastname,  email, adresse, phoneNumber, password,  confirmPassword;
 
     private Role role;
 
-    public AppUserForm( String firstname, String lastname, String email, String adresse , String password, String confirmPassword) {
+
+    public AppUserForm( String firstname, String lastname, String email, String phoneNumber, String adresse , String password, String confirmPassword) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.adresse = adresse;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
+
 
     public AppUserForm() {
 
@@ -52,6 +55,14 @@ public class AppUserForm {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

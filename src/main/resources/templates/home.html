@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
     <title>Home</title>
+    <style>
+        .menu-right{
+            float: right;
+        }
+        .menu-left{
+            float: left;
+        }
+        .menu-item{
+            margin: 25%;
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <ol>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
-    </ol>
-</nav>
-<h2>Bienvenue</h2>
+<div class="contenair">
+    <div class="menu">
+        <table class="menu-left">
+            <tr>
+                <td>
+                    <a class="menu-item">Acceuil</a>
+                </td>
+                <td>
+                    <a class="menu-item">Paniers</a>
+                </td>
+                <td>
+                    <a class="menu-item">Commercant</a>
+                </td>
+            </tr>
+        </table>
+        <table class="menu-right">
+            <div class="" th:if="${#authentication.isAuthenticated()==false}">
+                <tr>
+                    <td style="padding: 1%">
+                        <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                           href="/register">Register</a>
+                    </td>
+                    <td style="padding: 1%">
+                        <a class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                           href="/login">Login</a>
+                    </td>
+                </tr>
+            </div>
+            <div class="" th:if="${#authentication.isAuthenticated()==true}">
+                <tr>
+                    <td style="padding: 1%">
+                        <a  class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
+                        href="/account">Compte</a>
+                    </td>
+                    <td style="padding: 1%">
+                        <a class="bg-red-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-red-400 transition duration-400 hover:shadow-lg"
+                         href="/logout">Déconnection</a>
+                    </td>
+                </tr>
+            </div>
+
+        </table>
+    </div>
+</div>
+
+
+
 </body>
 </html>

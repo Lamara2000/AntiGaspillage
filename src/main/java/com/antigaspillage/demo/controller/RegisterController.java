@@ -27,9 +27,6 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepo;
 
-    @Autowired
-    EntityManager entityManager;
-
 
     @RequestMapping("/registerSuccessful")
     public String viewRegisterSuccessful(Model model) {
@@ -53,23 +50,20 @@ public class RegisterController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView saveRegister(Model model, @ModelAttribute("appUserForm")
     @Validated AppUserForm appUserForm, BindingResult result, final RedirectAttributes redirectAttributes) {
-        User usertest = appUserDAO.createAppUser(appUserForm);
-        System.out.println(usertest.toString());
+        ModelAndView modelAndView = new ModelAndView();
+        String error ="";
 
-        try {
-            System.out.println(appUserForm.toString());
             User newUser = appUserDAO.createAppUser(appUserForm);
-            userRepo.save(newUser);
-            redirectAttributes.addFlashAttribute("flashUser", newUser);
+            if (newUser!=null) {
+                userRepo.save(newUser);
+                redirectAttributes.addFlashAttribute("flashUser", newUser);
+                modelAndView.setViewName("registerSuccessful");
+            }else {
+                error = "Mots de passe non conforme";
+                modelAndView.addObject("error", error);
+                modelAndView.setViewName("register");
+            }
 
-        }
-        // Other error!!
-        catch (Exception e) {
-            List<Role> roles = roleDAO.findAll();
-            model.addAttribute("countries", roles);
-            model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            return new ModelAndView("registerPage");
-        }
-        return new ModelAndView("redirect:/registerSuccessful");
+        return modelAndView;
     }
 }

@@ -2,17 +2,16 @@ package com.antigaspillage.demo.data;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Trader {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
+	@ManyToOne
+	private User user;
 	
 	@Column(nullable = false)
 	private String companyName;
@@ -24,11 +23,13 @@ public class Trader {
 	
 	private String description;
 	
-	public Trader(String companyName, String location, String description) {
+	public Trader(User user, String companyName, String location, String description, Timestamp addDate) {
 		super();
+		this.user = user;
 		this.companyName = companyName;
 		this.location = location;
 		this.description = description;
+		this.addDate=addDate;
 	}
 	
 	public Trader() {
@@ -41,6 +42,14 @@ public class Trader {
 
 	public void setId(long idTrader) {
 		this.id = idTrader;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getCompanyName() {
