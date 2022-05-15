@@ -37,6 +37,11 @@ public class TraderDAOImpl implements ITraderDAO{
 
     }
 
+    @Override
+    public Trader findByRef(Long id) {
+        return entityManager.getReference(Trader.class, id);
+    }
+
 
     public Trader addNewTrader(AppTraderForm form, User user) {
         Date date = new Date();

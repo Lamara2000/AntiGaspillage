@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajoute un panier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row col-12 col-md-8 col-lg-6 mx-auto justify-content-center mt-5">
+    <h1 class="text-center mx-auto col-12 row">Reservé un panier</h1>
+    <br/><br/>
+
+    <form th:action="@{/rerservCart}" th:object="${reservasion}" method="POST">
+        <label class="font-bold text-lg block mb-2">Desription pannier : </label><div th:text="${reservasion.cart.description}"/>
+        <label class="font-bold text-lg block mb-2">N° d'article disponible : </label><div th:text="${reservasion.cart.nbCart}"/>
+        <label class="font-bold text-lg block mb-2">Date du panier : </label><div th:text="${reservasion.cart.date.toString()}"/>
+        <label class="font-bold text-lg block mb-2">Catégorie de la commande : </label><div th:text="${reservasion.cart.category.name}"/>
+        Quantité a réservé : <input type="number" th:field="*{quantity}"><br>
+        <input type="submit" class="btn btn-primary my-1" value="Reservé">
+    </form>
+</div>
+</body>
+</html>

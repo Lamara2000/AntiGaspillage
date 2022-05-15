@@ -67,7 +67,7 @@
         <div th:if="statut">
             <h3 class="text-center font-medium font-bold text-lg block mb-2" th:inline="text"> Pannier mis en vente :</h3><br>
             <a class="text-center bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
-               th:href="@{/becomeTrader(curUser=${user.id})}" >Ajouter un Panier</a><br>
+               th:href="/addCart" >Ajouter un Panier</a><br>
             <ul class="border-teal p-4 border-t-12 bg-white mb-8">
                 <div th:if="carts">
                     <li class="block-list" th:each="value:${carts}">

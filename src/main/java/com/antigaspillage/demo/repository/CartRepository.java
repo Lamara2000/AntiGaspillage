@@ -14,6 +14,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
     @Query("select c from Cart c where c.trader=:trader")
     List<Cart> listTraderCart(@Param("trader")Trader trader);
+    @Query("select c from Cart c where c.id=:id")
+    Cart findWithId(@Param("id")Long id);
 
     @Modifying
     @Transactional
